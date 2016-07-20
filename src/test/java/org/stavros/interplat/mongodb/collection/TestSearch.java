@@ -3,13 +3,14 @@ package org.stavros.interplat.mongodb.collection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.Map;
+
 import org.bson.Document;
 import org.junit.Before;
 import org.junit.Test;
 import org.stavros.interplat.model.Model;
 import org.stavros.interplat.model.Record;
 import org.stavros.interplat.mongodb.collection.query.MongoDBCollectionObject;
-import org.stavros.interplat.mongodb.utils.Utils;
 import org.stavros.interplat.source.GenericException;
 
 import com.mongodb.MongoClient;
@@ -37,32 +38,32 @@ public class TestSearch {
 		try {
 			MongoPojo temp = new MongoPojo();
 			temp.setId(1L);
-			collection.deleteMany(Utils.getDocument(temp));
+			collection.deleteMany((Document)org.stavros.converter.pojo.Converter.getMap(temp));
 			temp.setId(2L);
-			collection.deleteMany(Utils.getDocument(temp));
+			collection.deleteMany((Document)org.stavros.converter.pojo.Converter.getMap(temp));
 			temp.setId(3L);
-			collection.deleteMany(Utils.getDocument(temp));
+			collection.deleteMany((Document)org.stavros.converter.pojo.Converter.getMap(temp));
 			
 			MongoPojo mongoPojo1 = new MongoPojo();
 			mongoPojo1.setId(1L);
 			mongoPojo1.setName("testName1");
 			mongoPojo1.setCode("test1");
-			Document dbo1 = Utils.getDocument(mongoPojo1);
-			collection.insertOne(dbo1);
+			Map<String,Object> dbo1 = org.stavros.converter.pojo.Converter.getMap(mongoPojo1);
+			collection.insertOne((Document)dbo1);
 			
 			MongoPojo mongoPojo2 = new MongoPojo();
 			mongoPojo2.setId(2L);
 			mongoPojo2.setName("testName2");
 			mongoPojo2.setCode("test2");
-			Document dbo2 = Utils.getDocument(mongoPojo2);
-			collection.insertOne(dbo2);
+			Map<String,Object> dbo2 = org.stavros.converter.pojo.Converter.getMap(mongoPojo2);
+			collection.insertOne((Document)dbo2);
 			
 			MongoPojo mongoPojo3 = new MongoPojo();
 			mongoPojo3.setId(3L);
 			mongoPojo3.setName("testName3");
 			mongoPojo3.setCode("test3");
-			Document dbo3 = Utils.getDocument(mongoPojo3);
-			collection.insertOne(dbo3);
+			Map<String,Object> dbo3 = org.stavros.converter.pojo.Converter.getMap(mongoPojo3);
+			collection.insertOne((Document)dbo3);
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
